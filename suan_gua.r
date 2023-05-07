@@ -12,6 +12,8 @@
 # 倘若是“九”或者是“七”这两个奇数，就画出阳爻，是“八”或者“六”这两个偶数，就 画出阴爻。
 # 这样经过三次变化，就得出了一爻。每卦有六爻，所以要得出一个卦象，就要经 过十八变，即“十有八变而成卦”的意思。
 
+source("yao.r")
+source("gua.r")
 bian <- function(x) {
     # 变
     x <- x %% 4
@@ -72,5 +74,4 @@ suan_gua <- function(times=6, fn="rdata/六十四卦.rdata") {
 if (FALSE) {
     source("suan_gua.r")
     suan_gua()
-
 }
