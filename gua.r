@@ -1,4 +1,4 @@
-GUA <- list(乾=matrix(c(1, 1, 1,
+GUA_PLOT <- list(乾=matrix(c(1, 1, 1,
                         1, 1, 1,
                         1, 1, 1), nrow=3, byrow=TRUE),
             坤=matrix(c(1, 0, 1,
@@ -24,7 +24,7 @@ GUA <- list(乾=matrix(c(1, 1, 1,
                         1, 1, 1), nrow=3, byrow=TRUE))
 jing_gua <- function(item="巽", o=1) {
     # 画经卦
-    item <- GUA[[item]]
+    item <- GUA_PLOT[[item]]
     item <- item[rev(seq(len=nrow(item))), ]
     for (i in seq(len=nrow(item))) {
         x <- item[i, ]
@@ -41,16 +41,11 @@ if (FALSE) {
     jing_gua()
 }
 
-fu_gua <- function(x="明夷", fn="data/六十四卦.csv") {
+fu_gua <- function(x="明夷", fn="rdata/六十四卦.rdata") {
     # 画复卦
-    gua64 <- read.csv(file=fn, check.names=FALSE, row.names=1)
-    gua64_use <- sapply(gua64, function(x) gsub("\\d+\\. ", "", x))
-    gua64_use <- as.data.frame(gua64_use)
-    nm <- colnames(gua64_use)
-    alias_nm <- gsub(".（(.)）", "\\1", nm)
-    nm <- gsub("（.）", "", nm)
-    pat <- paste(c(alias_nm, "为"), collapse = "|")
-    gua64_use <- sapply(gua64_use, function(x) gsub(pat, "", x))
+
+    d <- get_load(fn)
+    list2env(d, envir=.GlobalEnv)
     idx <- which(gua64_use==x, arr.ind = TRUE)
     idx <- nm[idx]
     par(pty="s")

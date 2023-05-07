@@ -44,14 +44,29 @@ if (FALSE) {
 
 }
 
-suan_gua <- function(times=6) {
+GUA <- list(乾=c(1, 1, 1),
+            坤=c(0, 0, 0),
+            坎=c(0, 1, 0),
+            离=c(1, 0, 1),
+            巽=c(1, 1, 0),
+            震=c(0, 0, 1),
+            艮=c(1, 0, 0),
+            兑=c(0, 1, 1))
+
+suan_gua <- function(times=6, fn="rdata/六十四卦.rdata") {
     # 算卦
     ret <- rep(NA_integer_, times)
     while (times>0) {
         ret[times] <- suan_yao()
         times <- times - 1
     }
-    ret
+    d <- get_load(fn)
+    list2env(d, envir=.GlobalEnv)
+    gua <- sapply(GUA, paste, collapse="_")
+    gua <- gua[nm]
+    col <- which(paste(head(ret, 3), collapse="_") == gua)
+    row <- which(paste(tail(ret, 3), collapse="_") == gua)
+    gua64_use[row, col]
 }
 
 if (FALSE) {
