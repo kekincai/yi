@@ -75,4 +75,41 @@ if (FALSE) {
     source("suan_gua.r")
     ret <- suan_gua()
     fu_gua(ret)
+
+}
+
+suan_gua_mutil <- function(amount=100, fn="rdata/六十四卦.rdata") {
+    # 多次算卦
+    d <- get_load(fn)
+    list2env(d, envir=.GlobalEnv)
+    gua <- sapply(GUA, paste, collapse="_")
+    gua <- gua[nm]
+    gua64_use <- unname(gua64_use)
+    suan_gua_one <- function() {
+        times <- 6
+        ret <- rep(NA_integer_, times)
+        while (times>0) {
+            ret[times] <- suan_yao()
+            times <- times - 1
+        }
+        col <- which(paste(head(ret, 3), collapse="_") == gua)
+        row <- which(paste(tail(ret, 3), collapse="_") == gua)
+        gua64_use[row, col]
+    }
+    replicate(amount, suan_gua_one())
+
+}
+
+if (FALSE) {
+    source("suan_gua.r")
+    ret <- suan_gua_mutil(1000000)
+    tb <- table(ret)
+    barplot(tb)
+    idx <- as.integer(gua_idx)
+    guas <- as.character(gua64_use)
+    to_idx <- match(ret, guas)
+    ret_idx <- idx[to_idx]
+    par(pty="m")
+    hist(ret_idx, main="卦序", col="steelblue", cex.main=4)
+
 }
