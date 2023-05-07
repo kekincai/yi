@@ -73,5 +73,6 @@ suan_gua <- function(times=6, fn="rdata/六十四卦.rdata") {
 
 if (FALSE) {
     source("suan_gua.r")
-    suan_gua()
+    ret <- suan_gua()
+    fu_gua(ret)
 }

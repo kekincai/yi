@@ -5,3 +5,4 @@
 ## 使用方法
 1. 执行read_data.r 文件中的read_data函数，生成需要的六十四卦rdata
 2. 执行suan_gua.r 文件中的suan_gua函数，即可随机算一卦
+3. 参照示例，执行fu_gua函数，画图卦象

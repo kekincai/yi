@@ -23,7 +23,7 @@ GUA_PLOT <- list(乾=matrix(c(1, 1, 1,
                         1, 1, 1,
                         1, 1, 1), nrow=3, byrow=TRUE))
 jing_gua <- function(item="巽", o=1) {
-    # 画经卦
+    # 画经卦的卦象
     item <- GUA_PLOT[[item]]
     item <- item[rev(seq(len=nrow(item))), ]
     for (i in seq(len=nrow(item))) {
@@ -42,7 +42,7 @@ if (FALSE) {
 }
 
 fu_gua <- function(x="明夷", fn="rdata/六十四卦.rdata") {
-    # 画复卦
+    # 画复卦的卦象
 
     d <- get_load(fn)
     list2env(d, envir=.GlobalEnv)
