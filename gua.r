@@ -43,7 +43,6 @@ if (FALSE) {
 
 fu_gua <- function(x="明夷", fn="data/六十四卦.csv") {
     # 画复卦
-    # browser()
     gua64 <- read.csv(file=fn, check.names=FALSE, row.names=1)
     gua64_use <- sapply(gua64, function(x) gsub("\\d+\\. ", "", x))
     gua64_use <- as.data.frame(gua64_use)
@@ -55,8 +54,7 @@ fu_gua <- function(x="明夷", fn="data/六十四卦.csv") {
     idx <- which(gua64_use==x, arr.ind = TRUE)
     idx <- nm[idx]
     par(pty="s")
-    par(family = "HiraKakuProN-W3")
-    # browser()
+    par(family = "STKaiti")
     plot(0, 0 , xlim=c(0, 5), ylim=c(0, 24),
          axes=FALSE, type = "n", xlab = "", ylab = "",
          main = x, cex.main=4)
@@ -68,4 +66,5 @@ fu_gua <- function(x="明夷", fn="data/六十四卦.csv") {
 if (FALSE) {
     source("gua.r")
     fu_gua()
+    fu_gua("归妹")
 }
